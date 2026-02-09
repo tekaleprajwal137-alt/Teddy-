@@ -1,22 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teddy Day Gift Box</title>
-    <style>
-        body { text-align: center; font-family: Arial, sans-serif; }
-        #giftBox { width: 200px; height: 200px; background-color: pink; margin: 100px auto; position: relative; border-radius: 10px; }
-        #lid { width: 200px; height: 100px; background-color: red; position: absolute; top: -100px; left: 0; transition: top 0.5s; border-radius: 10px 10px 0 0; }
-        #giftBox:hover #lid { top: 0; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Teddy Day Vedikaaa!</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #ffe4e1;
+    font-family: 'Arial', sans-serif;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  #box {
+    width: 150px;
+    height: 150px;
+    background: brown;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #lid {
+    width: 150px;
+    height: 30px;
+    background: #8b4513;
+    position: absolute;
+    top: 0;
+    border-radius: 10px 10px 0 0;
+    transition: all 1s ease;
+    z-index: 2;
+  }
+  #teddy {
+    position: absolute;
+    bottom: -200px;
+    width: 120px;
+    height: 140px;
+    background: #d2a679;
+    border-radius: 60% 60% 50% 50%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 1;
+    transition: all 0.8s ease;
+  }
+  #head {
+    width: 80px;
+    height: 70px;
+    background: #d2a679;
+    border-radius: 50%;
+    margin-top: 10px;
+    position: relative;
+  }
+  #ear-left, #ear-right {
+    width: 30px;
+    height: 30px;
+    background: #d2a679;
+    border-radius: 50%;
+    position: absolute;
+    top: -15px;
+  }
+  #ear-left { left: -10px; }
+  #ear-right { right: -10px; }
+  #eye-left, #eye-right {
+    width: 10px;
+    height: 10px;
+    background: black;
+    border-radius: 50%;
+    position: absolute;
+    top: 25px;
+  }
+  #eye-left { left: 20px; }
+  #eye-right { right: 20px; }
+  #nose {
+    width: 12px;
+    height: 8px;
+    background: black;
+    border-radius: 50%;
+    position: absolute;
+    top: 45px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  #mouth {
+    width: 20px;
+    height: 10px;
+    border-bottom: 3px solid black;
+    border-radius: 0 0 50% 50%;
+    position: absolute;
+    top: 55px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  #body {
+    width: 80px;
+    height: 80px;
+    background: #d2a679;
+    border-radius: 50%;
+    margin-top: -10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+  }
+  #arm-left, #arm-right {
+    width: 25px;
+    height: 40px;
+    background: #d2a679;
+    border-radius: 50%;
+    transform-origin: top center;
+  }
+  .wave-left { animation: wave-left 0.8s infinite alternate; }
+  .wave-right { animation: wave-right 0.8s infinite alternate; }
+  @keyframes wave-left { 0% { transform: rotate(0deg); } 100% { transform: rotate(-30deg); } }
+  @keyframes wave-right { 0% { transform: rotate(0deg); } 100% { transform: rotate(30deg); } }
+
+  .confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 0.9;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0% { transform: translateY(0) rotate(0); opacity: 1; }
+    100% { transform: translateY(500px) rotate(360deg); opacity: 0; }
+  }
+
+  #message {
+    display: none;
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff1493;
+    text-align: center;
+  }
+</style>
 </head>
 <body>
-    <h1>Teddy Day Interactive Gift Box</h1>
-    <div id="giftBox">
-        <div id="lid"></div>
-        <h2 style="margin-top: 70px;">Surprise!</h2>
+
+<div id="box">
+  <div id="lid"></div>
+  Click to Open
+  <div id="teddy">
+    <div id="head">
+      <div id="ear-left"></div>
+      <div id="ear-right"></div>
+      <div id="eye-left"></div>
+      <div id="eye-right"></div>
+      <div id="nose"></div>
+      <div id="mouth"></div>
     </div>
-    <p>Hover over the gift box to open it.</p>
+    <div id="body">
+      <div id="arm-left"></div>
+      <div id="arm-right"></div>
+    </div>
+  </div>
+</div>
+
+<div id="message">Happy Teddy Day Vedikaaa! ❤️</div>
+
+<script>
+  const box = document.getElementById('box');
+  const lid = document.getElementById('lid');
+  const teddy = document.getElementById('teddy');
+  const message = document.getElementById('message');
+  const armLeft = document.getElementById('arm-left');
+  const armRight = document.getElementById('arm-right');
+  const mouth = document.getElementById('mouth');
+
+  function createConfetti() {
+    const c = document.createElement('div');
+    c.classList.add('confetti');
+    c.style.left = Math.random() * window.innerWidth + 'px';
+    c.style.background = `hsl(${Math.random()*360}, 80%, 60%)`;
+    c.style.animationDuration = (2 + Math.random()*2) + 's';
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 4000);
+  }
+
+  box.addEventListener('click', () => {
+    lid.style.transform = 'rotateX(180deg) translateY(-40px)';
+    lid.style.background = '#d2691e';
+    box.childNodes[2].textContent = '';
+    teddy.style.display = 'flex';
+    setInterval(createConfetti, 200);
+
+    setTimeout(() => {
+      teddy.style.bottom = '10px';
+      armLeft.classList.add('wave-left');
+      armRight.classList.add('wave-right');
+      mouth.style.opacity = 1;
+      message.style.display = 'block';
+    }, 500);
+  });
+</script>
+
 </body>
 </html>
