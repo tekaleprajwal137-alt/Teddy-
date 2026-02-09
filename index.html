@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teddy Day Gift Box</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        #giftBox { width: 200px; height: 200px; background-color: pink; margin: 100px auto; position: relative; border-radius: 10px; }
+        #lid { width: 200px; height: 100px; background-color: red; position: absolute; top: -100px; left: 0; transition: top 0.5s; border-radius: 10px 10px 0 0; }
+        #giftBox:hover #lid { top: 0; }
+    </style>
+</head>
+<body>
+    <h1>Teddy Day Interactive Gift Box</h1>
+    <div id="giftBox">
+        <div id="lid"></div>
+        <h2 style="margin-top: 70px;">Surprise!</h2>
+    </div>
+    <p>Hover over the gift box to open it.</p>
+</body>
+</html>
